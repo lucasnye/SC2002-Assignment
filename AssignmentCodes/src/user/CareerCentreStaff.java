@@ -18,8 +18,8 @@ public class CareerCentreStaff extends User {
      * @param password The staff's password (e.g., "password")[cite: 37].
      * @param staffDepartment The department the staff belongs to[cite: 42].
      */
-    public CareerCenterStaff(String userID, String name, String password, String staffDepartment) {
-        super(userID, name, password);
+    public CareerCentreStaff(String userID, String name, String password, String staffDepartment) {
+        super(userID, name, password, Role.CAREERCENTRESTAFF);
         this.staffDepartment = staffDepartment;
     }
 
