@@ -10,7 +10,7 @@ public class RepRegistration {
     private String companyName;
     private String department;
     private String position;
-    private RegistrationStatus status;
+    private Status status;
 
     /**
      * Constructs a new RepRegistration object.
@@ -26,7 +26,7 @@ public class RepRegistration {
         this.companyName = companyName;
         this.department = department;
         this.position = position;
-        this.status = RegistrationStatus.PENDING; // Default status
+        this.status = Status.PENDING; // Default status
     }
 
     // --- Getters ---
@@ -48,7 +48,7 @@ public class RepRegistration {
         return position;
     }
 
-    public RegistrationStatus getStatus() {
+    public Status getStatus() {
         return status;
     }
 
@@ -58,7 +58,7 @@ public class RepRegistration {
      *
      * @param status The new status (APPROVED or REJECTED).
      */
-    public void setStatus(RegistrationStatus status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 }

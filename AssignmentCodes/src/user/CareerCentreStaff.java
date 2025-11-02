@@ -39,14 +39,14 @@ public class CareerCentreStaff extends User {
      */
     public void approveRep(RepRegistration reg, boolean approve) {
         if (approve) {
-            reg.setStatus(RegistrationStatus.APPROVED);
+            reg.setStatus(Status.APPROVED);
             System.out.println("Registration for " + reg.getEmail() + " approved.");
             // --- YOUR LOGIC HERE ---
             // e.g., Create a new CompanyRepresentative user object from the
             // registration details and add it to your main list of users.
             
         } else {
-            reg.setStatus(RegistrationStatus.REJECTED);
+            reg.setStatus(Status.REJECTED);
             System.out.println("Registration for " + reg.getEmail() + " rejected.");
             // --- YOUR LOGIC HERE ---
             // e.g., Remove the registration request from the pending list.
