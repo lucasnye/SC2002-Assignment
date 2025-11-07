@@ -1,0 +1,8 @@
+public enum ApplicationStatus {
+    PENDING,
+    APPROVED_BY_COMPANY,
+    REJECTED_BY_COMPANY,
+    WITHDRAWAL_REQUESTED,
+    WITHDRAWN,
+    ACCEPTED_BY_STUDENT
+}
