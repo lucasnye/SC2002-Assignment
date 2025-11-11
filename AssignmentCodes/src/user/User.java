@@ -14,6 +14,11 @@ public abstract class User{
         this.role = role;
     }
 
+    // getters
+    public String getUserId() {
+        return this.userId;
+    }
+
     public boolean login(String userId,String password){
         if (this.userId.equals(userId)&&this.password.equals(password)){
             loggedIn = true;

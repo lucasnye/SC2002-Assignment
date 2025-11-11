@@ -1,3 +1,5 @@
+package user;
+
 public class Application {
     private String studentID;
     private int year;

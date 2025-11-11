@@ -1,3 +1,5 @@
+package user;
+
 public enum ApplicationStatus {
     PENDING,
     APPROVED_BY_COMPANY,
