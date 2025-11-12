@@ -1,5 +1,8 @@
 package user;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Internship {
     private String company;
     private String companyRep;
@@ -13,6 +16,7 @@ public class Internship {
     private int numberOfSlots;
     private Status status;
     private boolean visibility;
+    private List<Application> studentApplicants = new ArrayList<>();
 
     // Basic constructor
     public Internship (String company, String companyRep, String title) {
@@ -53,6 +57,14 @@ public class Internship {
         return this.visibility;
     }
 
+    public String getTitle() {
+        return this.title;
+    }
+
+    public int getNumberOfSlots() {
+        return this.numberOfSlots;
+    }
+
     // Setters
     public void setStatus(Status status) {
         this.status = status;
@@ -84,6 +96,15 @@ public class Internship {
 
     public void setVisibility(boolean vis) {
         this.visibility = vis;
+    }
+
+    // keeping track of student applicants
+    public void addApplication(Application app) {
+        studentApplicants.add(app);
+    }
+
+    public List<Application> getApplications() {
+        return studentApplicants;
     }
 
     @Override

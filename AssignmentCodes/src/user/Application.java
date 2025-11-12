@@ -42,6 +42,14 @@ public class Application {
             return false;
         }
     }
+
+    // need this for CompanyRep class
+    // code sets status of application
+    public void setStatus(AppStatus status) {
+        this.status = status;
+    }
+
+
     public String print() {
         return String.format(
             "Application Details:\n" +
