@@ -29,13 +29,13 @@ public class Student extends User {
     }
 
     public void toggleProfileVisibility(){
-        this.profileVisibility =! this.profileVisibility;
+        this.profileVisibility = !this.profileVisibility;
     }
 
     public List<Internship> viewAvailableOpportunities(List<Internship> allInternship){
         List<Internship> result = new ArrayList<>();
         for (Internship i : allInternship) {
-            if (i.visibility() && (i.getMajor() == null || i.getMajor().equalsIgnoreCase(this.major))){
+            if (i.getvisibility() && (i.getMajor() == null || i.getMajor().equalsIgnoreCase(this.major))){
                 result.add(i);
             }
         }
@@ -76,7 +76,7 @@ public class Student extends User {
         if (accepted){
             for (Application a : applications){
                 if (a != application && a.getStatus() != ApplicationStatus.WITHDRAWN){
-                    a.setStatus(ApplicationStatus.WITHDRAWN);
+                    a.setStatus(AppStatus.WITHDRAWN);
                 }
             }
             return application.getInternship();
@@ -86,7 +86,7 @@ public class Student extends User {
 
     public void requestWithdrawal(Application application){
         if (applications.contains(application)){
-            application.setStatus(ApplicationStatus.WITHDRAWAL_REQUESTED);
+            application.setStatus(AppStatus.WITHDRAWAL_REQUESTED);
         }
     }
 
@@ -94,4 +94,5 @@ public class Student extends User {
         return applications.size();
     }
 }
+
 
