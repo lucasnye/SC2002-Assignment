@@ -5,6 +5,7 @@ public class Application {
     private int year;
     private AppStatus status;
     private boolean accepted;
+    private Internship internship;        //added this
 
     //assumes new application made will never already be accepted
     public Application(String studentID, int year, AppStatus status){
@@ -13,6 +14,13 @@ public class Application {
         this.status = status;
         this.accepted = false;
     }
+
+    //added this
+    public Application(String studentID, int year, AppStatus status, Internship internship){
+        this(studentID, year, status);
+        this.internship = internship;
+    }
+    
     public String getStudentID(){
         return studentID;
     }
@@ -25,6 +33,12 @@ public class Application {
     public boolean getAccepted(){
         return accepted;
     }
+
+    //added this. i need this getter so Student class can get the internship back
+    public Internship getInternship(){
+        return internship;
+    }
+    
     //only used to check if they can accept, if want to check status use getStatus()
     public boolean successfulApp(){
         if (status == AppStatus.SUCCESSFUL){
@@ -63,3 +77,4 @@ public class Application {
 
 
 }
+
