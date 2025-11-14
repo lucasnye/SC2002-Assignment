@@ -3,5 +3,8 @@ package user;
 public enum AppStatus {
     PENDING,
     SUCCESSFUL,
-    UNSUCCESSFUL
+    UNSUCCESSFUL,
+    WITHDRAWAL_REQUESTED,        //added this
+    WITHDRAWN                    //added this
 }
+
