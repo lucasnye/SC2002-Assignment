@@ -56,6 +56,7 @@ public class Student extends User {
         if (this.year <= 2 && internshipOpportunity.getLevel() != InternshipLevel.BASIC){
             System.out.println("Y1 and Y2 students can only apply for basic internships");
             return null;
+        }
         
         Application app = new Application(this.getUserId(), this.year, AppStatus.PENDING, internshipOpportunity);
         applications.add(app);
@@ -100,6 +101,7 @@ public class Student extends User {
         return applications.size();
     }
 }
+
 
 
 
