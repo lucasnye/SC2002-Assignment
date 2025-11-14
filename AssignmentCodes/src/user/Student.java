@@ -36,6 +36,9 @@ public class Student extends User {
         List<Internship> result = new ArrayList<>();
         for (Internship i : allInternship) {
             if (i.visibility() && (i.getMajor() == null || i.getMajor().equalsIgnoreCase(this.major))){
+                if (this.year <= 2 && i.getLevel() != InternshipLevel.BASIC){
+                    continue;
+                }
                 result.add(i);
             }
         }
@@ -52,8 +55,20 @@ public class Student extends User {
             return null;
         }
 
-        Application app = new Application(this.userID, this.year, ApplicationStatus.PENDING, false, false, internshipOpportunity);
+        if (this.year <= 2 && internshipOpportunity.getLevel() != InternshipLevel.BASIC){
+            System.out.println("Y1 and Y2 students only allowed to apply for basic internship");
+            return null;
+        }
+
+        if (intershipOpportunity.getMajor() != null && !internshipOpportunity.getMajor().equalsIgnoreCase(this.major)){
+            System.out.println("Major does not match preferred major")
+                return null;
+        }
+
+        Application app = new Application(this.userID, this.year, internshipOpportunity);
         applications.add(app);
+        internshipOpportunity.addApplication(app);
+        System.out.println("Application submitted");
         return app;
     }
 
@@ -70,6 +85,7 @@ public class Student extends User {
             System.out.println("Application unscuccessful.");
             return null;
         }
+        
         boolean accepted = application.acceptPlacement();
         if (accepted){
             for (Application a : applications){
@@ -93,5 +109,6 @@ public class Student extends User {
         return applications.size();
     }
     
+
 
 }
