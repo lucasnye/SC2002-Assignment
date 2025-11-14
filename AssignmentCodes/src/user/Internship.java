@@ -65,6 +65,15 @@ public class Internship {
         return this.numberOfSlots;
     }
 
+    //added this getter for Student
+    public String getMajor(){
+        return this.major;
+    }
+
+    public InternshipLevel getLevel(){
+        return this.level;
+    }
+
     // Setters
     public void setStatus(Status status) {
         this.status = status;
