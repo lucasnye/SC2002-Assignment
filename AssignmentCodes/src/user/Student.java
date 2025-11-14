@@ -68,7 +68,7 @@ public class Student extends User {
         }
 
         if (!application.successfulApp()){
-            System.out.println("Application unscuccessful.");
+            System.out.println("Application unsuccessful.");
             return null;
         }
         
@@ -94,6 +94,7 @@ public class Student extends User {
         return applications.size();
     }
 }
+
 
 
 
