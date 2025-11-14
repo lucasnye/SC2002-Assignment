@@ -70,6 +70,11 @@ public class Internship {
         return this.major;
     }
 
+    //since theres the different level of internship, added this
+    public InternshipLevel getLevel(){
+        return this.level;
+    }
+
     // Setters
     public void setStatus(Status status) {
         this.status = status;
