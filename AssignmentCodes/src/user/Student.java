@@ -51,6 +51,12 @@ public class Student extends User {
             System.out.println("You have reached the maximum of 3 active application");
             return null;
         }
+
+        //the different level of internship for y1 and y2
+        if (this.year <= 2 && internshipOpportunity.getLevel() != InternshipLevel.BASIC){
+            System.out.println("Y1 and Y2 students can only apply for basic internships");
+            return null;
+        
         Application app = new Application(this.getUserId(), this.year, AppStatus.PENDING, internshipOpportunity);
         applications.add(app);
         internshipOpportunity.addApplication(app);
@@ -94,6 +100,7 @@ public class Student extends User {
         return applications.size();
     }
 }
+
 
 
 
