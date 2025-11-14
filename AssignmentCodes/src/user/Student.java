@@ -35,7 +35,7 @@ public class Student extends User {
     public List<Internship> viewAvailableOpportunities(List<Internship> allInternship){
         List<Internship> result = new ArrayList<>();
         for (Internship i : allInternship) {
-            if (i.getvisibility() && (i.getMajor() == null || i.getMajor().equalsIgnoreCase(this.major))){
+            if (i.getVisibility() && (i.getMajor() == null || i.getMajor().equalsIgnoreCase(this.major))){
                 result.add(i);
             }
         }
@@ -67,7 +67,7 @@ public class Student extends User {
             return null;
         }
 
-        if (!application.successfulApplication()){
+        if (!application.successfulApp()){
             System.out.println("Application unscuccessful.");
             return null;
         }
@@ -75,7 +75,7 @@ public class Student extends User {
         boolean accepted = application.acceptPlacement();
         if (accepted){
             for (Application a : applications){
-                if (a != application && a.getStatus() != ApplicationStatus.WITHDRAWN){
+                if (a != application && a.getStatus() != AppStatus.WITHDRAWN){
                     a.setStatus(AppStatus.WITHDRAWN);
                 }
             }
@@ -94,5 +94,6 @@ public class Student extends User {
         return applications.size();
     }
 }
+
 
 
