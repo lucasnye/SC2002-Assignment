@@ -118,6 +118,7 @@ public class CareerCenterView {
         switch (choice) {
             case "1":
                 careerCenterController.approveRepresentative(rep);
+                careerCenterController.updateStatus(careerCenterController.getCompanyReps(), rep);
                 break;
             case "2":
                 careerCenterController.rejectRepresentative(rep);

@@ -93,7 +93,6 @@ public class AuthController {
         User currentUser = sessionManager.getCurrentUser();
         
         if (currentUser.changePassword(oldPassword, newPassword)) {
-            System.out.println("Password changed successfully!");
             return true;
         } else {
             System.out.println("Incorrect old password.");
@@ -107,19 +106,23 @@ public class AuthController {
      * @return User object if found, null otherwise
      */
     private User findUser(String userId) {
+        // Make userID non-case sensitive
+        String upperUserID = userId.toUpperCase();
         // Check if it's a student ID
-        if (ValidationUtil.isValidStudentId(userId)) {
+        if (ValidationUtil.isValidStudentId(upperUserID)) {
             for (Student student : students) {
-                if (student.getUserId().equals(userId)) {
+                if (student.getUserId().equals(upperUserID)) {
                     return student;
                 }
             }
         }
         
+        // Make Staff ID non-case sensitive
+        String lowerStaffID = userId.toLowerCase();
         // Check if it's a staff ID
-        if (ValidationUtil.isValidStaffId(userId)) {
+        if (ValidationUtil.isValidStaffId(lowerStaffID)) {
             for (CareerCenterStaff staffMember : staff) {
-                if (staffMember.getUserId().equals(userId)) {
+                if (staffMember.getUserId().equals(lowerStaffID)) {
                     return staffMember;
                 }
             }

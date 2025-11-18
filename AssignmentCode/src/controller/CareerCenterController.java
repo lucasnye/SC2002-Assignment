@@ -10,6 +10,7 @@ import enums.ApplicationStatus;
 import enums.RequestStatus;
 import enums.InternshipLevel;
 import enums.Major;
+import util.FileHandler;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,6 +44,10 @@ public class CareerCenterController {
         rep.setRegistrationApproved(true);
         System.out.println("Company representative approved: " + rep.getName());
         return true;
+    }
+
+    public void updateStatus(List<CompanyRepresentative> companyReps, CompanyRepresentative rep) {
+        FileHandler.saveCompanyReps(companyReps, "assets/company_representative_list.csv"); // UPDATED to change status of company rep in csv file
     }
     
     /**
@@ -199,5 +204,9 @@ public class CareerCenterController {
         internships = internshipController.sortByTitle(internships);
         
         return internships;
+    }
+
+    public List<CompanyRepresentative> getCompanyReps() {
+        return this.companyReps;
     }
 }

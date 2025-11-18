@@ -47,7 +47,7 @@ public class MainApplication {
      */
     private void initialize() {
         System.out.println("==============================================");
-        System.out.println("  INITIALIZING SYSTEM...");
+        System.out.println("  INITIALISING SYSTEM...");
         System.out.println("==============================================\n");
         
         // Load data from CSV files
@@ -60,7 +60,7 @@ public class MainApplication {
         createViews();
         
         System.out.println("\n==============================================");
-        System.out.println("  SYSTEM INITIALIZATION COMPLETE");
+        System.out.println("  SYSTEM INITIALISATION COMPLETE");
         System.out.println("==============================================\n");
     }
     
@@ -89,7 +89,7 @@ public class MainApplication {
      * Creates all controllers
      */
     private void createControllers() {
-        System.out.println("\nInitializing controllers...");
+        System.out.println("\nInitialising controllers...");
         
         // Create internship controller (manages all internships)
         internshipController = new InternshipController();
@@ -108,14 +108,14 @@ public class MainApplication {
         // Create auth controller (manages login/logout)
         authController = new AuthController(students, companyReps, staff);
         
-        System.out.println("Controllers initialized successfully!");
+        System.out.println("Controllers initialised successfully!");
     }
     
     /**
      * Creates all views
      */
     private void createViews() {
-        System.out.println("Initializing views...");
+        System.out.println("Initialising views...");
         
         // Create reusable internship view
         internshipView = new InternshipView();
@@ -141,7 +141,7 @@ public class MainApplication {
             authController, studentView, companyRepView, careerCenterView
         );
         
-        System.out.println("Views initialized successfully!");
+        System.out.println("Views initialised successfully!");
     }
     
     /**
