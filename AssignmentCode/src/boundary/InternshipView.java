@@ -35,6 +35,7 @@ public class InternshipView {
         System.out.println("Company: " + internship.getCompanyName());
         System.out.println("Level: " + internship.getLevel());
         System.out.println("Preferred Major: " + internship.getPreferredMajor().getFullName());
+        System.out.println("Description: " + internship.getDescription());
         System.out.println("Status: " + internship.getStatus().getDisplayName());
         System.out.println("Slots: " + internship.getFilledSlots() + "/" + internship.getTotalSlots());
         System.out.println("Opening Date: " + internship.getOpeningDate());

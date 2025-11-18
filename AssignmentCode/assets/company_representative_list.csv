@@ -2,3 +2,4 @@ CompanyRepID,Name,CompanyName,Department,Position,Email,Status
 CR0001,Lucas Ng Yao En,Google,IT,Manager,luca0010@e.ntu.edu.sg,Pending
 CR0002,Tan Tze Ian Elliot,Dyson,Mechanical,Manager,test123@e.ntu.edu.sg,Approved
 CR0003,Low Jun Hao,GIC,IT,Manager,idk123@e.ntu.edu.sg,Approved
+CR0004,Lucas Ng Yao En,Jane Street,IT,Manager,luca0010@e.ntu.edu.sg,Approved
