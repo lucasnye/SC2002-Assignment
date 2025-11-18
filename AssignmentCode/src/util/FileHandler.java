@@ -218,8 +218,8 @@ public class FileHandler {
                     return major;
                 }
             }
-            System.err.println("Unknown major: " + majorStr + ", defaulting to CSC");
-            return Major.CSC;
+            System.err.println("Unknown major: " + majorStr + ", defaulting to CS");
+            return Major.CS;
         }
     }
     

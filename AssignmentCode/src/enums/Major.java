@@ -1,7 +1,10 @@
 package enums;
 
 public enum Major {
-	CSC("Computer Science"),
+	CS("Computer Science"),
+    DSAI("Data Science & AI"),
+    CE("Computer Engineering"),
+    IEM("Information Engineering & Media"),
     EEE("Electrical and Electronic Engineering"),
     MAE("Mechanical and Aerospace Engineering"),
     CEE("Civil and Environmental Engineering"),

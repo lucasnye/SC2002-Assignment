@@ -180,22 +180,23 @@ public class CompanyRepView {
         for (int i = 0; i < majors.length; i++) {
             System.out.println((i + 1) + ". " + majors[i].getFullName());
         }
-        System.out.print("Enter choice: ");
-        String majorChoice = scanner.nextLine().trim();
         
-        Major preferredMajor;
-        try {
-            int majorIndex = Integer.parseInt(majorChoice) - 1;
-            if (majorIndex >= 0 && majorIndex < majors.length) {
-                preferredMajor = majors[majorIndex];
-            } else {
-                System.out.println("Invalid major. Defaulting to Computer Science.");
-                preferredMajor = Major.CSC;
+        Major preferredMajor = null;
+        do {
+            System.out.print("Enter choice: ");
+            String majorChoice = scanner.nextLine().trim();
+            try {
+                int majorIndex = Integer.parseInt(majorChoice) - 1;
+                if (majorIndex >= 0 && majorIndex < majors.length) {
+                    preferredMajor = majors[majorIndex];
+                } else {
+                    System.out.println("Invalid major. Try again.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Try again.");
             }
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid input. Defaulting to Computer Science.");
-            preferredMajor = Major.CSC;
-        }
+        } while (preferredMajor == null);
+
         
         // Dates
         System.out.print("Opening Date (yyyy-MM-dd): ");
@@ -217,18 +218,18 @@ public class CompanyRepView {
         }
         
         // Slots
-        System.out.print("Number of Slots (1-10): ");
-        int slots;
-        try {
-            slots = Integer.parseInt(scanner.nextLine().trim());
-            if (!ValidationUtil.isWithinRange(slots, 1, 10)) {
-                System.out.println("Slots must be between 1 and 10. Defaulting to 1.");
-                slots = 1;
+        int slots = 0;
+        do {
+            System.out.print("Number of Slots (1-10): ");
+            try {
+                slots = Integer.parseInt(scanner.nextLine().trim());
+                if (!ValidationUtil.isWithinRange(slots, 1, 10)) {
+                    System.out.println("Slots must be between 1 and 10. Try again.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid number. Try again.");
             }
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid number. Defaulting to 1.");
-            slots = 1;
-        }
+        } while (!ValidationUtil.isWithinRange(slots, 1, 10));
         
         companyRepController.createInternship(rep, title, description, level, 
                                              preferredMajor, openingDate, closingDate, slots);
