@@ -102,7 +102,7 @@ public class CompanyRepController {
         }
         
         // Check status
-        if (internship.getStatus() != InternshipStatus.PENDING) {
+        if (internship.getStatus() != InternshipStatus.PENDING || internship.getStatus() != InternshipStatus.REJECTED) {
             System.out.println("Can only delete pending internship opportunities.");
             return false;
         }
