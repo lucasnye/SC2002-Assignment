@@ -79,7 +79,9 @@ public class CompanyRepController {
         internship.setTitle(title);
         internship.setDescription(description);
         internship.setTotalSlots(totalSlots);
-        
+
+        internshipController.updateInternship(); // Save changes to CSV
+
         System.out.println("Internship opportunity updated successfully.");
         return true;
     }
@@ -217,7 +219,9 @@ public class CompanyRepController {
         
         // Toggle visibility
         internship.setVisible(!internship.isVisible());
-        
+
+        internshipController.updateInternship(); // Save changes to CSV
+
         String status = internship.isVisible() ? "visible" : "hidden";
         System.out.println("Internship is now " + status + " to students.");
         return true;

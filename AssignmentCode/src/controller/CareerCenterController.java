@@ -89,6 +89,7 @@ public class CareerCenterController {
         }
         
         internship.setStatus(InternshipStatus.APPROVED);
+        internshipController.updateInternship(); // Save changes to CSV
         System.out.println("Internship opportunity approved: " + internship.getTitle());
         return true;
     }
@@ -103,6 +104,7 @@ public class CareerCenterController {
         }
         
         internship.setStatus(InternshipStatus.REJECTED);
+        internshipController.updateInternship(); // Save changes to CSV
         System.out.println("Internship opportunity rejected.");
         return true;
     }
@@ -145,9 +147,10 @@ public class CareerCenterController {
             );
             if (internship != null) {
                 internship.decrementFilledSlots();
+                internshipController.updateInternship(); // Save changes to CSV
             }
         }
-        
+
         // Withdraw the application
         application.withdraw();
         

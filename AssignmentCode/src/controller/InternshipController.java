@@ -5,6 +5,7 @@ import entity.user.Student;
 import enums.InternshipLevel;
 import enums.InternshipStatus;
 import enums.Major;
+import util.FileHandler;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,13 +16,48 @@ import java.util.stream.Collectors;
  * Handles internship opportunity management and filtering
  */
 public class InternshipController {
-    
+
     private List<InternshipOpportunity> internships;
     private int nextOpportunityId;
-    
+    private static final String INTERNSHIP_FILE_PATH = "assets/internship_list.csv";
+
     public InternshipController() {
         this.internships = new ArrayList<>();
         this.nextOpportunityId = 1;
+    }
+
+    /**
+     * Loads internships from CSV file
+     */
+    public void loadInternshipsFromFile() {
+        internships = FileHandler.loadInternships(INTERNSHIP_FILE_PATH);
+        updateNextOpportunityId();
+    }
+
+    /**
+     * Saves internships to CSV file
+     */
+    public void saveInternshipsToFile() {
+        FileHandler.saveInternships(internships, INTERNSHIP_FILE_PATH);
+    }
+
+    /**
+     * Updates the nextOpportunityId based on existing internships
+     */
+    private void updateNextOpportunityId() {
+        int maxId = 0;
+        for (InternshipOpportunity internship : internships) {
+            String id = internship.getOpportunityId();
+            if (id.startsWith("INT")) {
+                try {
+                    int num = Integer.parseInt(id.substring(3));
+                    maxId = Math.max(maxId, num);
+                } catch (NumberFormatException e) {
+                    // Skip invalid IDs
+                }
+            }
+        }
+        nextOpportunityId = maxId + 1;
     }
     
     /**
@@ -31,15 +67,16 @@ public class InternshipController {
                                                    InternshipLevel level, Major preferredMajor,
                                                    LocalDate openingDate, LocalDate closingDate,
                                                    String companyName, String repId, int totalSlots) {
-        
+
         String opportunityId = generateOpportunityId();
-        
+
         InternshipOpportunity internship = new InternshipOpportunity(
             opportunityId, title, description, level, preferredMajor,
             openingDate, closingDate, companyName, repId, totalSlots
         );
-        
+
         internships.add(internship);
+        saveInternshipsToFile(); // Auto-save to CSV
         return internship;
     }
     
@@ -178,6 +215,17 @@ public class InternshipController {
      * Removes an internship
      */
     public boolean removeInternship(InternshipOpportunity internship) {
-        return internships.remove(internship);
+        boolean removed = internships.remove(internship);
+        if (removed) {
+            saveInternshipsToFile(); // Auto-save to CSV
+        }
+        return removed;
+    }
+
+    /**
+     * Updates an internship (call this after modifying internship attributes)
+     */
+    public void updateInternship() {
+        saveInternshipsToFile(); // Save changes to CSV
     }
 }

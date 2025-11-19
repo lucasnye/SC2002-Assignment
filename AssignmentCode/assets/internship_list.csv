@@ -1,0 +1,2 @@
+OpportunityID,Title,Description,Level,PreferredMajor,OpeningDate,ClosingDate,Status,CompanyName,AssignedRepresentativeId,TotalSlots,FilledSlots,IsVisible
+INT0001,aiohfi,woihEFqw2rf,BASIC,CS,2025-11-19,2025-12-31,APPROVED,Jane Street,CR0001,1,0,false

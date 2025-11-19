@@ -118,8 +118,9 @@ public class StudentController {
         if (internship != null) {
             internship.incrementFilledSlots();
             student.setAcceptedInternship(internship);
+            internshipController.updateInternship(); // Save changes to CSV
         }
-        
+
         // Withdraw all other applications
         withdrawOtherApplications(student, application);
         

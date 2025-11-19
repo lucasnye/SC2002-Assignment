@@ -3,9 +3,14 @@ package util;
 import entity.user.Student;
 import entity.user.CareerCenterStaff;
 import entity.user.CompanyRepresentative;
+import entity.domain.InternshipOpportunity;
 import enums.Major;
+import enums.InternshipLevel;
+import enums.InternshipStatus;
 
 import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -228,7 +233,7 @@ public class FileHandler {
      */
     public static String generateCompanyRepId(List<CompanyRepresentative> existingReps) {
         int maxId = 0;
-        
+
         for (CompanyRepresentative rep : existingReps) {
             String id = rep.getUserId();
             if (id.startsWith(COMPANY_REP_ID_PREFIX)) {
@@ -240,7 +245,169 @@ public class FileHandler {
                 }
             }
         }
-        
+
         return String.format("%s%04d", COMPANY_REP_ID_PREFIX, maxId + 1);
+    }
+
+    /**
+     * Loads internship opportunities from CSV file
+     * CSV Format: OpportunityID,Title,Description,Level,PreferredMajor,OpeningDate,ClosingDate,Status,CompanyName,AssignedRepresentativeId,TotalSlots,FilledSlots,IsVisible
+     */
+    public static List<InternshipOpportunity> loadInternships(String filePath) {
+        List<InternshipOpportunity> internships = new ArrayList<>();
+
+        File file = new File(filePath);
+        if (!file.exists()) {
+            System.out.println("Internship file not found. Starting with empty list.");
+            createInternshipFile(filePath);
+            return internships;
+        }
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            boolean isFirstLine = true;
+
+            while ((line = br.readLine()) != null) {
+                if (isFirstLine) {
+                    isFirstLine = false;
+                    continue;
+                }
+
+                if (line.trim().isEmpty()) {
+                    continue;
+                }
+
+                String[] data = parseCSVLine(line);
+                if (data.length >= 13) {
+                    try {
+                        String opportunityId = data[0].trim();
+                        String title = data[1].trim();
+                        String description = data[2].trim();
+                        InternshipLevel level = InternshipLevel.valueOf(data[3].trim().toUpperCase());
+                        Major preferredMajor = parseMajor(data[4].trim());
+                        LocalDate openingDate = LocalDate.parse(data[5].trim());
+                        LocalDate closingDate = LocalDate.parse(data[6].trim());
+                        InternshipStatus status = InternshipStatus.valueOf(data[7].trim().toUpperCase());
+                        String companyName = data[8].trim();
+                        String assignedRepresentativeId = data[9].trim();
+                        int totalSlots = Integer.parseInt(data[10].trim());
+                        int filledSlots = Integer.parseInt(data[11].trim());
+                        boolean isVisible = Boolean.parseBoolean(data[12].trim());
+
+                        InternshipOpportunity internship = new InternshipOpportunity(
+                            opportunityId, title, description, level, preferredMajor,
+                            openingDate, closingDate, companyName, assignedRepresentativeId, totalSlots
+                        );
+
+                        internship.setStatus(status);
+                        internship.setFilledSlots(filledSlots);
+                        internship.setVisible(isVisible);
+
+                        internships.add(internship);
+                    } catch (IllegalArgumentException | DateTimeParseException e) {
+                        System.err.println("Error parsing internship data: " + e.getMessage());
+                    }
+                }
+            }
+
+            System.out.println("Loaded " + internships.size() + " internships from " + filePath);
+
+        } catch (IOException e) {
+            System.err.println("Error reading internship file: " + e.getMessage());
+        }
+
+        return internships;
+    }
+
+    /**
+     * Saves internship opportunities to CSV file
+     */
+    public static void saveInternships(List<InternshipOpportunity> internships, String filePath) {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(filePath))) {
+            pw.println("OpportunityID,Title,Description,Level,PreferredMajor,OpeningDate,ClosingDate,Status,CompanyName,AssignedRepresentativeId,TotalSlots,FilledSlots,IsVisible");
+
+            for (InternshipOpportunity internship : internships) {
+                String line = String.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%d,%d,%b",
+                    internship.getOpportunityId(),
+                    internship.getTitle(),
+                    escapeCSV(internship.getDescription()),
+                    internship.getLevel(),
+                    internship.getPreferredMajor(),
+                    internship.getOpeningDate(),
+                    internship.getClosingDate(),
+                    internship.getStatus(),
+                    internship.getCompanyName(),
+                    internship.getAssignedRepresentativeId(),
+                    internship.getTotalSlots(),
+                    internship.getFilledSlots(),
+                    internship.isVisible()
+                );
+                pw.println(line);
+            }
+
+            System.out.println("Saved " + internships.size() + " internships to " + filePath);
+
+        } catch (IOException e) {
+            System.err.println("Error writing internship file: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Creates an empty internship file with header
+     */
+    private static void createInternshipFile(String filePath) {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(filePath))) {
+            pw.println("OpportunityID,Title,Description,Level,PreferredMajor,OpeningDate,ClosingDate,Status,CompanyName,AssignedRepresentativeId,TotalSlots,FilledSlots,IsVisible");
+            System.out.println("Created new internship file: " + filePath);
+        } catch (IOException e) {
+            System.err.println("Error creating internship file: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Helper method to escape CSV values (handles commas and quotes in descriptions)
+     */
+    private static String escapeCSV(String value) {
+        if (value == null) {
+            return "";
+        }
+
+        // If the value contains comma, quote, or newline, wrap it in quotes and escape internal quotes
+        if (value.contains(",") || value.contains("\"") || value.contains("\n")) {
+            return "\"" + value.replace("\"", "\"\"") + "\"";
+        }
+
+        return value;
+    }
+
+    /**
+     * Helper method to parse a CSV line handling quoted values
+     */
+    private static String[] parseCSVLine(String line) {
+        List<String> result = new ArrayList<>();
+        StringBuilder current = new StringBuilder();
+        boolean inQuotes = false;
+
+        for (int i = 0; i < line.length(); i++) {
+            char c = line.charAt(i);
+
+            if (c == '"') {
+                // Check for escaped quote (two consecutive quotes)
+                if (i + 1 < line.length() && line.charAt(i + 1) == '"') {
+                    current.append('"');
+                    i++; // Skip next quote
+                } else {
+                    inQuotes = !inQuotes;
+                }
+            } else if (c == ',' && !inQuotes) {
+                result.add(current.toString());
+                current = new StringBuilder();
+            } else {
+                current.append(c);
+            }
+        }
+
+        result.add(current.toString());
+        return result.toArray(new String[0]);
     }
 }

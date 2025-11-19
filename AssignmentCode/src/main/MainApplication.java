@@ -69,16 +69,16 @@ public class MainApplication {
      */
     private void loadData() {
         System.out.println("Loading data from files...\n");
-        
+
         // Load students
         students = FileHandler.loadStudents("assets/student_list.csv");
-        
+
         // Load staff
         staff = FileHandler.loadStaff("assets/staff_list.csv");
-        
+
         // Load company representatives (may be empty initially)
         companyReps = FileHandler.loadCompanyReps("assets/company_representative_list.csv");
-        
+
         System.out.println("\nData loading complete!");
         System.out.println("Students: " + students.size());
         System.out.println("Staff: " + staff.size());
@@ -90,24 +90,28 @@ public class MainApplication {
      */
     private void createControllers() {
         System.out.println("\nInitialising controllers...");
-        
+
         // Create internship controller (manages all internships)
         internshipController = new InternshipController();
-        
+
+        // Load internships from CSV file
+        internshipController.loadInternshipsFromFile();
+        System.out.println("Internships: " + internshipController.getAllInternships().size());
+
         // Create student controller (manages applications and withdrawals)
         studentController = new StudentController(internshipController);
-        
+
         // Create company rep controller (manages internship creation and application processing)
         companyRepController = new CompanyRepController(internshipController, studentController);
-        
+
         // Create career center controller (manages approvals and reports)
         careerCenterController = new CareerCenterController(
             companyReps, internshipController, studentController
         );
-        
+
         // Create auth controller (manages login/logout)
         authController = new AuthController(students, companyReps, staff);
-        
+
         System.out.println("Controllers initialised successfully!");
     }
     
