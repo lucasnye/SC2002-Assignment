@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"AssignmentCode","l":"boundary"},{"m":"AssignmentCode","l":"controller"},{"m":"AssignmentCode","l":"entity.domain"},{"m":"AssignmentCode","l":"entity.user"},{"m":"AssignmentCode","l":"enums"},{"m":"AssignmentCode","l":"main"},{"m":"AssignmentCode","l":"util"}];updateSearchResults();
