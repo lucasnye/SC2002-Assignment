@@ -1,5 +1,1 @@
 OpportunityID,Title,Description,Level,PreferredMajor,OpeningDate,ClosingDate,Status,CompanyName,AssignedRepresentativeId,TotalSlots,FilledSlots,IsVisible
-INT0001,Pending Internship,Description,BASIC,CS,2025-11-19,2025-12-19,PENDING,Test Company,CR0001,5,0,false
-INT0002,new,new,BASIC,CS,2025-11-19,2025-12-19,FILLED,Test Company,CR0001,1,1,true
-INT0003,Approved Internship,Description,BASIC,CS,2025-11-19,2025-12-19,APPROVED,Test Company,CR0001,5,0,false
-INT0004,test,,BASIC,CS,2025-11-19,2025-12-31,APPROVED,Jane Street,CR0001,2,0,true
