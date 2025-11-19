@@ -101,8 +101,8 @@ public class AuthController {
     }
     
     /**
-     * Finds a user by their ID across all user lists
-     * @param userId User ID to search for
+     * Finds a user by their ID or email across all user lists
+     * @param userId User ID or email to search for
      * @return User object if found, null otherwise
      */
     private User findUser(String userId) {
@@ -116,7 +116,7 @@ public class AuthController {
                 }
             }
         }
-        
+
         // Make Staff ID non-case sensitive
         String lowerStaffID = userId.toLowerCase();
         // Check if it's a staff ID
@@ -127,14 +127,23 @@ public class AuthController {
                 }
             }
         }
-        
-        // Check company representatives (by ID)
+
+        // Check if it's an email (for company representatives)
+        if (ValidationUtil.isValidEmail(userId)) {
+            for (CompanyRepresentative rep : companyReps) {
+                if (rep.getEmail().equalsIgnoreCase(userId)) {
+                    return rep;
+                }
+            }
+        }
+
+        // Check company representatives (by ID) - for backward compatibility
         for (CompanyRepresentative rep : companyReps) {
             if (rep.getUserId().equals(userId)) {
                 return rep;
             }
         }
-        
+
         return null;
     }
     

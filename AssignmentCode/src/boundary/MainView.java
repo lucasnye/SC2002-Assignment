@@ -82,12 +82,15 @@ public class MainView {
      */
     private void handleLogin() {
         System.out.println("\n========== LOGIN ==========");
-        System.out.print("User ID: ");
+        System.out.println("Students: Use Student ID (e.g., U2310001A)");
+        System.out.println("Staff: Use Staff ID (e.g., sng001)");
+        System.out.println("Company Reps: Use Email (e.g., john@company.com)");
+        System.out.print("\nUser ID / Email: ");
         String userId = scanner.nextLine().trim();
-        
+
         System.out.print("Password: ");
         String password = scanner.nextLine().trim();
-        
+
         authController.login(userId, password);
     }
     
