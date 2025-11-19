@@ -56,110 +56,191 @@ public class InternshipOpportunity implements Serializable {
     }
     
     // Getters and Setters
+    /**
+     * Returns opportunity ID
+     */
     public String getOpportunityId() {
         return opportunityId;
     }
     
+    /**
+     * Sets opportunity ID
+     */
     public void setOpportunityId(String opportunityId) {
         this.opportunityId = opportunityId;
     }
     
+    /**
+     * Returns title
+     */
     public String getTitle() {
         return title;
     }
     
+    /**
+     * Sets title
+     */
     public void setTitle(String title) {
         this.title = title;
     }
     
+    /**
+     * Returns description
+     */
     public String getDescription() {
         return description;
     }
     
+    /**
+     * Sets description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
     
+    /**
+     * Returns internship level
+     */
     public InternshipLevel getLevel() {
         return level;
     }
     
+    /**
+     * Sets internship level
+     */
     public void setLevel(InternshipLevel level) {
         this.level = level;
     }
     
+    /**
+     * Returns preferred major
+     */
     public Major getPreferredMajor() {
         return preferredMajor;
     }
     
+    /**
+     * Sets preferred major
+     */
     public void setPreferredMajor(Major preferredMajor) {
         this.preferredMajor = preferredMajor;
     }
     
+    /**
+     * Returns opening date
+     */
     public LocalDate getOpeningDate() {
         return openingDate;
     }
     
+    /**
+     * Sets opening date
+     */
     public void setOpeningDate(LocalDate openingDate) {
         this.openingDate = openingDate;
     }
     
+    /**
+     * Returns closing date
+     */
     public LocalDate getClosingDate() {
         return closingDate;
     }
     
+    /**
+     * Sets closing date
+     */
     public void setClosingDate(LocalDate closingDate) {
         this.closingDate = closingDate;
     }
     
+    /**
+     * Returns internship status
+     */
     public InternshipStatus getStatus() {
         return status;
     }
     
+    /**
+     * Sets internship status
+     */
     public void setStatus(InternshipStatus status) {
         this.status = status;
     }
     
+    /**
+     * Returns company name
+     */
     public String getCompanyName() {
         return companyName;
     }
     
+    /**
+     * Sets company name
+     */
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
     
+    /**
+     * Returns representative ID
+     */
     public String getAssignedRepresentativeId() {
         return assignedRepresentativeId;
     }
     
+    /**
+     * Sets representative ID
+     */
     public void setAssignedRepresentativeId(String assignedRepresentativeId) {
         this.assignedRepresentativeId = assignedRepresentativeId;
     }
     
+    /**
+     * Returns internship slots
+     */
     public int getTotalSlots() {
         return totalSlots;
     }
     
+    /**
+     * Sets internship slots
+     */
     public void setTotalSlots(int totalSlots) {
         this.totalSlots = Math.min(totalSlots, MAX_SLOTS);
     }
     
+    /**
+     * Returns filled internship slots
+     */
     public int getFilledSlots() {
         return filledSlots;
     }
     
+    /**
+     * Sets filled internship slots
+     */
     public void setFilledSlots(int filledSlots) {
         this.filledSlots = filledSlots;
     }
     
+    /**
+     * Returns if internship is visible to students
+     */
     public boolean isVisible() {
         return isVisible;
     }
     
+    /**
+     * Sets internship visibility to students
+     */
     public void setVisible(boolean visible) {
         isVisible = visible;
     }
     
+    /**
+     * Returns internship application list
+     */
     public List<InternshipApplication> getApplications() {
         return applications;
     }
@@ -221,6 +302,9 @@ public class InternshipOpportunity implements Serializable {
                && !today.isAfter(closingDate);
     }
     
+    /**
+     * Print internship information
+     */
     @Override
     public String toString() {
         return "ID: " + opportunityId + ", Title: " + title + 

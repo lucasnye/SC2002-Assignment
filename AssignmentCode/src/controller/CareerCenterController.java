@@ -46,6 +46,9 @@ public class CareerCenterController {
         return true;
     }
 
+    /**
+     * Updates the csv file to store a company representative's details
+     */
     public void updateStatus(List<CompanyRepresentative> companyReps, CompanyRepresentative rep) {
         FileHandler.saveCompanyReps(companyReps, "assets/company_representative_list.csv"); // UPDATED to change status of company rep in csv file
     }
@@ -209,6 +212,9 @@ public class CareerCenterController {
         return internships;
     }
 
+    /**
+     * Returns company representative
+     */
     public List<CompanyRepresentative> getCompanyReps() {
         return this.companyReps;
     }

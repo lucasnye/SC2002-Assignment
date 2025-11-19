@@ -29,36 +29,58 @@ public abstract class User implements Serializable {
     }
     
     // Getters and Setters
+    /**
+     * Returns user ID
+     */
     public String getUserId() {
         return userId;
     }
     
+    /**
+     * Sets user ID
+     */
     public void setUserId(String userId) {
         this.userId = userId;
     }
     
+    /**
+     * Returns user name
+     */
     public String getName() {
         return name;
     }
     
+    /**
+     * Sets user name
+     */
     public void setName(String name) {
         this.name = name;
     }
     
-    // ADDED
+    /**
+     * Returns user email
+     */
     public String getEmail() {
         return email;
     }
     
-    // ADDED
+    /**
+     * Sets user email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
     
+    /**
+     * Returns user password
+     */
     public String getPassword() {
         return password;
     }
     
+    /**
+     * Sets user email
+     */
     protected void setPassword(String password) {
         this.password = password;
     }
@@ -93,6 +115,9 @@ public abstract class User implements Serializable {
      */
     public abstract String getUserType();
     
+    /**
+     * Prints user information
+     */
     @Override
     public String toString() {
         return "User ID: " + userId + ", Name: " + name + ", Email: " + email;

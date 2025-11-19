@@ -31,50 +31,86 @@ public class InternshipApplication implements Serializable {
     }
     
     // Getters and Setters
+    /**
+     * Returns application ID
+     */
     public String getApplicationId() {
         return applicationId;
     }
     
+    /**
+     * Sets application ID
+     */
     public void setApplicationId(String applicationId) {
         this.applicationId = applicationId;
     }
     
+    /**
+     * Returns student ID
+     */
     public String getStudentId() {
         return studentId;
     }
     
+    /**
+     * Sets student ID
+     */
     public void setStudentId(String studentId) {
         this.studentId = studentId;
     }
     
+    /**
+     * Returns internship ID
+     */
     public String getOpportunityId() {
         return opportunityId;
     }
     
+    /**
+     * Sets internship ID
+     */
     public void setOpportunityId(String opportunityId) {
         this.opportunityId = opportunityId;
     }
     
+    /**
+     * Returns application status
+     */
     public ApplicationStatus getApplicationStatus() {
         return applicationStatus;
     }
     
+    /**
+     * Sets application ID
+     */
     public void setApplicationStatus(ApplicationStatus applicationStatus) {
         this.applicationStatus = applicationStatus;
     }
     
+    /**
+     * Checks if student is placed in internship
+     */
     public boolean isPlacementConfirmed() {
         return isPlacementConfirmed;
     }
     
+    /**
+     * Sets internship placement status
+     */
     public void setPlacementConfirmed(boolean placementConfirmed) {
         isPlacementConfirmed = placementConfirmed;
     }
     
+    /**
+     * Get application date
+     */
     public LocalDate getApplicationDate() {
         return applicationDate;
     }
     
+    /**
+     * Set application date
+     */
     public void setApplicationDate(LocalDate applicationDate) {
         this.applicationDate = applicationDate;
     }
@@ -103,6 +139,9 @@ public class InternshipApplication implements Serializable {
                || applicationStatus == ApplicationStatus.SUCCESSFUL;
     }
     
+    /**
+     * Print function to display application info
+     */
     @Override
     public String toString() {
         return "Application ID: " + applicationId + 

@@ -36,66 +36,114 @@ public class WithdrawalRequest implements Serializable {
     }
     
     // Getters and Setters
+    /**
+     * Returns withdrawal request ID
+     */
     public String getRequestId() {
         return requestId;
     }
     
+    /**
+     * Sets withdrawal request ID
+     */
     public void setRequestId(String requestId) {
         this.requestId = requestId;
     }
     
+    /**
+     * Returns student ID
+     */
     public String getStudentId() {
         return studentId;
     }
     
+    /**
+     * Sets student ID
+     */
     public void setStudentId(String studentId) {
         this.studentId = studentId;
     }
     
+    /**
+     * Returns application ID
+     */
     public String getApplicationId() {
         return applicationId;
     }
     
+    /**
+     * Sets application ID
+     */
     public void setApplicationId(String applicationId) {
         this.applicationId = applicationId;
     }
     
+    /**
+     * Returns withdrawal request status
+     */
     public RequestStatus getRequestStatus() {
         return requestStatus;
     }
     
+    /**
+     * Sets withdrawal request status
+     */
     public void setRequestStatus(RequestStatus requestStatus) {
         this.requestStatus = requestStatus;
     }
     
+    /**
+     * Returns if withdrawal request is submitted before successful placement
+     */
     public boolean isBeforePlacement() {
         return isBeforePlacement;
     }
     
+    /**
+     * Sets withdrawal request submitted before successful placement status
+     */
     public void setBeforePlacement(boolean beforePlacement) {
         isBeforePlacement = beforePlacement;
     }
     
+    /**
+     * Returns request date
+     */
     public LocalDate getRequestDate() {
         return requestDate;
     }
     
+    /**
+     * Sets request date
+     */
     public void setRequestDate(LocalDate requestDate) {
         this.requestDate = requestDate;
     }
     
+    /**
+     * Returns request processed date
+     */
     public LocalDate getProcessedDate() {
         return processedDate;
     }
     
+    /**
+     * Sets request processed date
+     */
     public void setProcessedDate(LocalDate processedDate) {
         this.processedDate = processedDate;
     }
     
+    /**
+     * Returns request remarks
+     */
     public String getRemarks() {
         return remarks;
     }
     
+    /**
+     * Sets request remarks
+     */
     public void setRemarks(String remarks) {
         this.remarks = remarks;
     }
@@ -118,6 +166,9 @@ public class WithdrawalRequest implements Serializable {
         this.remarks = remarks;
     }
     
+    /**
+     * Prints withdrawal request information
+     */
     @Override
     public String toString() {
         return "Request ID: " + requestId + 

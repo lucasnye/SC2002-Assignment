@@ -36,37 +36,59 @@ public class Student extends User {
         this.acceptedInternship = null;
     }
     
-    // Rest of the code remains the same...
-    // (Keep all the other methods as they were)
     
+    /**
+     * Returns year of study
+     */
     public int getYearOfStudy() {
         return yearOfStudy;
     }
     
+    /**
+     * Sets year of study
+     */
     public void setYearOfStudy(int yearOfStudy) {
         this.yearOfStudy = yearOfStudy;
     }
     
+    /**
+     * Returns major
+     */
     public Major getMajor() {
         return major;
     }
     
+    /**
+     * Sets major
+     */
     public void setMajor(Major major) {
         this.major = major;
     }
     
+    /**
+     * Returns applications
+     */
     public List<InternshipApplication> getApplications() {
         return applications;
     }
     
+    /**
+     * Returns accepted applications
+     */
     public InternshipOpportunity getAcceptedInternship() {
         return acceptedInternship;
     }
     
+    /**
+     * Sets internship acceptance status
+     */
     public void setAcceptedInternship(InternshipOpportunity acceptedInternship) {
         this.acceptedInternship = acceptedInternship;
     }
     
+    /**
+     * Returns if application successfully added
+     */
     public boolean addApplication(InternshipApplication application) {
         if (applications.size() < MAX_APPLICATIONS) {
             applications.add(application);
@@ -75,23 +97,38 @@ public class Student extends User {
         return false;
     }
     
+    /**
+     * Removes application
+     */
     public void removeApplication(InternshipApplication application) {
         applications.remove(application);
     }
     
+    /**
+     * Checks if student can apply for internship
+     */
     public boolean canApply() {
         return applications.size() < MAX_APPLICATIONS && acceptedInternship == null;
     }
     
+    /**
+     * Returns number of applications submitted
+     */
     public int getApplicationCount() {
         return applications.size();
     }
     
+    /**
+     * Returns user type (student)
+     */
     @Override
     public String getUserType() {
         return "STUDENT";
     }
     
+    /**
+     * Prints student information
+     */
     @Override
     public String toString() {
         return super.toString() + ", Year: " + yearOfStudy + ", Major: " + major;

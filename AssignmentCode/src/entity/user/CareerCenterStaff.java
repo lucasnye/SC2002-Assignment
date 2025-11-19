@@ -21,19 +21,31 @@ public class CareerCenterStaff extends User {
         this.staffDepartment = staffDepartment;
     }
     
+    /**
+     * Returns staff department
+     */
     public String getStaffDepartment() {
         return staffDepartment;
     }
     
+    /**
+     * Sets staff department
+     */
     public void setStaffDepartment(String staffDepartment) {
         this.staffDepartment = staffDepartment;
     }
     
+    /**
+     * Returns user type (career center staff)
+     */
     @Override
     public String getUserType() {
         return "CAREER_STAFF";
     }
     
+    /**
+     * Prints staff information
+     */
     @Override
     public String toString() {
         return super.toString() + ", Department: " + staffDepartment;
