@@ -16,6 +16,9 @@ public enum InternshipStatus {
         this.displayName = displayName;
     }
     
+    /**
+     * Returns the internship status for display
+     */
     public String getDisplayName() {
         return displayName;
     }

@@ -16,6 +16,9 @@ public enum ApplicationStatus {
         this.displayName = displayName;
     }
     
+    /**
+     * Returns the application status for display
+     */
     public String getDisplayName() {
         return displayName;
     }

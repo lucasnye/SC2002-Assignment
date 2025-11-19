@@ -15,6 +15,9 @@ public enum RequestStatus {
         this.displayName = displayName;
     }
     
+    /**
+     * Returns the withdrawal request status for display
+     */
     public String getDisplayName() {
         return displayName;
     }

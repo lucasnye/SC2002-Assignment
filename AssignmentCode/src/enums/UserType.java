@@ -15,6 +15,9 @@ public enum UserType {
         this.displayName = displayName;
     }
     
+    /**
+     * Returns the user type for display
+     */
     public String getDisplayName() {
         return displayName;
     }

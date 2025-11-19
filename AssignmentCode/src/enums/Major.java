@@ -24,6 +24,9 @@ public enum Major {
         this.fullName = fullName;
     }
     
+    /**
+     * Returns the student's major for display
+     */
     public String getFullName() {
         return fullName;
     }
