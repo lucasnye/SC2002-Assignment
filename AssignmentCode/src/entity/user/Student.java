@@ -109,8 +109,8 @@ public class Student extends User {
      * Checks if student can apply for internship
      */
     public boolean canApply() {
-        return getActiveApplicationCount() < MAX_APPLICATIONS && acceptedInternship == null;
-    }
+        return getActiveApplicationCount() < MAX_APPLICATIONS && !hasConfirmedPlacement();
+    }    
     
     /**
      * Returns number of applications submitted
@@ -122,10 +122,27 @@ public class Student extends User {
     /**
      * Counts active (non-withdrawn) applications
      */
-    private long getActiveApplicationCount() {
-        return applications.stream()
-            .filter(app -> app.getApplicationStatus() != ApplicationStatus.WITHDRAWN)
-            .count();
+    private int getActiveApplicationCount() {
+        int count = 0;
+        for (InternshipApplication app : applications) {
+            ApplicationStatus status = app.getApplicationStatus();
+            if (status == ApplicationStatus.PENDING || status == ApplicationStatus.SUCCESSFUL) {
+                count++;
+            }
+        }
+        return count;
+    }
+    
+    /**
+     * Checks if student has confirmed placement for internship
+     */
+    public boolean hasConfirmedPlacement() {
+        for (InternshipApplication app : applications) {
+            if (app.isPlacementConfirmed()) {
+                return true;
+            }
+        }
+        return false;
     }
     
     /**

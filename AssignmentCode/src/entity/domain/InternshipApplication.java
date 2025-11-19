@@ -129,6 +129,7 @@ public class InternshipApplication implements Serializable {
      */
     public void withdraw() {
         applicationStatus = ApplicationStatus.WITHDRAWN;
+        isPlacementConfirmed = false;
     }
     
     /**
