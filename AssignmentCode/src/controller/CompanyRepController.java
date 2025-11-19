@@ -80,9 +80,16 @@ public class CompanyRepController {
         internship.setDescription(description);
         internship.setTotalSlots(totalSlots);
 
+        // If the internship was rejected, reset status to PENDING for re-approval
+        if (internship.getStatus() == InternshipStatus.REJECTED) {
+            internship.setStatus(InternshipStatus.PENDING);
+            System.out.println("Internship opportunity updated successfully. Status reset to PENDING for Career Center re-approval.");
+        } else {
+            System.out.println("Internship opportunity updated successfully.");
+        }
+
         internshipController.updateInternship(); // Save changes to CSV
 
-        System.out.println("Internship opportunity updated successfully.");
         return true;
     }
     
@@ -102,10 +109,10 @@ public class CompanyRepController {
             System.out.println("Cannot delete an internship with existing applications.");
             return false;
         }
-        
-        // Check status
-        if (internship.getStatus() != InternshipStatus.PENDING || internship.getStatus() != InternshipStatus.REJECTED) {
-            System.out.println("Can only delete pending internship opportunities.");
+
+        // Check status - can only delete PENDING or REJECTED internships
+        if (internship.getStatus() != InternshipStatus.PENDING && internship.getStatus() != InternshipStatus.REJECTED) {
+            System.out.println("Can only delete pending or rejected internship opportunities.");
             return false;
         }
         

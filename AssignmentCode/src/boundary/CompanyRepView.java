@@ -266,28 +266,28 @@ public class CompanyRepView {
             return;
         }
         
-        // Show only pending internships (can only edit pending)
-        List<InternshipOpportunity> pendingInternships = internships.stream()
-            .filter(i -> i.getStatus() == InternshipStatus.PENDING)
+        // Show only pending and rejected internships (can only edit these)
+        List<InternshipOpportunity> editableInternships = internships.stream()
+            .filter(i -> i.getStatus() == InternshipStatus.PENDING || i.getStatus() == InternshipStatus.REJECTED)
             .toList();
-        
-        if (pendingInternships.isEmpty()) {
-            System.out.println("You have no pending internships to edit.");
+
+        if (editableInternships.isEmpty()) {
+            System.out.println("You have no editable internships.");
             System.out.println("Note: Only pending or rejected internships can be edited.");
             return;
         }
-        
-        internshipView.displayInternshipList(pendingInternships);
-        
+
+        internshipView.displayInternshipList(editableInternships);
+
         System.out.print("\nEnter Internship ID to edit (or 'cancel'): ");
         String internshipId = scanner.nextLine().trim();
-        
+
         if (internshipId.equalsIgnoreCase("cancel")) {
             return;
         }
 
         InternshipOpportunity internship = null;
-        for (InternshipOpportunity intern : pendingInternships) {
+        for (InternshipOpportunity intern : editableInternships) {
             if (intern.getOpportunityId().equalsIgnoreCase(internshipId)) {
                 internship = intern;
             }
