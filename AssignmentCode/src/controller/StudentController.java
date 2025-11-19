@@ -109,17 +109,28 @@ public class StudentController {
             System.out.println("You have already accepted this placement.");
             return false;
         }
-        
+
+        // Find internship and check if slots are still available
+        InternshipOpportunity internship = internshipController.findInternshipById(application.getOpportunityId());
+        if (internship == null) {
+            System.out.println("Internship not found.");
+            return false;
+        }
+
+        // Check if slots are still available (important for race conditions)
+        if (!internship.hasAvailableSlots()) {
+            System.out.println("Sorry, all slots for this internship have been filled.");
+            System.out.println("Another student has already accepted this position.");
+            return false;
+        }
+
         // Confirm placement
         application.confirmPlacement();
-        
-        // Find internship and update slots
-        InternshipOpportunity internship = internshipController.findInternshipById(application.getOpportunityId());
-        if (internship != null) {
-            internship.incrementFilledSlots();
-            student.setAcceptedInternship(internship);
-            internshipController.updateInternship(); // Save changes to CSV
-        }
+
+        // Update slots
+        internship.incrementFilledSlots();
+        student.setAcceptedInternship(internship);
+        internshipController.updateInternship(); // Save changes to CSV
 
         // Withdraw all other applications
         withdrawOtherApplications(student, application);
