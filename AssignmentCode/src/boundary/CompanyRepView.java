@@ -155,24 +155,27 @@ public class CompanyRepView {
         System.out.println("1. BASIC");
         System.out.println("2. INTERMEDIATE");
         System.out.println("3. ADVANCED");
-        System.out.print("Enter choice: ");
-        String levelChoice = scanner.nextLine().trim();
-        
-        InternshipLevel level;
-        switch (levelChoice) {
-            case "1":
-                level = InternshipLevel.BASIC;
-                break;
-            case "2":
-                level = InternshipLevel.INTERMEDIATE;
-                break;
-            case "3":
-                level = InternshipLevel.ADVANCED;
-                break;
-            default:
-                System.out.println("Invalid level. Defaulting to BASIC.");
-                level = InternshipLevel.BASIC;
-        }
+
+        InternshipLevel level = null;
+        do {
+            System.out.print("Enter choice: ");
+            String levelChoice = scanner.nextLine().trim();
+            
+            switch (levelChoice) {
+                case "1":
+                    level = InternshipLevel.BASIC;
+                    break;
+                case "2":
+                    level = InternshipLevel.INTERMEDIATE;
+                    break;
+                case "3":
+                    level = InternshipLevel.ADVANCED;
+                    break;
+                default:
+                    System.out.println("Invalid level. Try again.");
+            }
+        } while (level == null);
+
         
         // Select major
         System.out.println("\nPreferred Major:");
@@ -270,7 +273,7 @@ public class CompanyRepView {
         
         if (pendingInternships.isEmpty()) {
             System.out.println("You have no pending internships to edit.");
-            System.out.println("Note: Only pending internships can be edited.");
+            System.out.println("Note: Only pending or rejected internships can be edited.");
             return;
         }
         
@@ -282,8 +285,13 @@ public class CompanyRepView {
         if (internshipId.equalsIgnoreCase("cancel")) {
             return;
         }
-        
-        InternshipOpportunity internship = internshipController.findInternshipById(internshipId);
+
+        InternshipOpportunity internship = null;
+        for (InternshipOpportunity intern : pendingInternships) {
+            if (intern.getOpportunityId().equalsIgnoreCase(internshipId)) {
+                internship = intern;
+            }
+        }
         
         if (internship == null) {
             System.out.println("Invalid Internship ID.");
