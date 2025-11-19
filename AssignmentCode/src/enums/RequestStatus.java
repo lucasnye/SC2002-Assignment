@@ -1,5 +1,9 @@
 package enums;
 
+/**
+ * Represents the states of a withdrawal request
+ */
+
 public enum RequestStatus {
 	PENDING("Pending Review"),
     APPROVED("Approved"),

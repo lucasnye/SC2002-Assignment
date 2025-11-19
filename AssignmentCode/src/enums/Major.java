@@ -1,5 +1,9 @@
 package enums;
 
+/**
+ * Represents the types of an majors
+ */
+
 public enum Major {
 	CS("Computer Science"),
     DSAI("Data Science & AI"),

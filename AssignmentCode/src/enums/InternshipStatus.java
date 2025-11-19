@@ -1,5 +1,9 @@
 package enums;
 
+/**
+ * Represents the states of an internship listing
+ */
+
 public enum InternshipStatus {
 	PENDING("Pending Approval"),
     APPROVED("Approved"),

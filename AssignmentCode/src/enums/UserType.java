@@ -1,5 +1,9 @@
 package enums;
 
+/**
+ * Represents the types of users within the application
+ */
+
 public enum UserType {
 	STUDENT("Student"),
     COMPANY_REP("Company Representative"),

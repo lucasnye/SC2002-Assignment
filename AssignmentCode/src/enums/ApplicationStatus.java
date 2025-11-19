@@ -1,5 +1,9 @@
 package enums;
 
+/**
+ * Represents the states of an internship application
+ */
+
 public enum ApplicationStatus {
 	PENDING("Pending Review"),
     SUCCESSFUL("Approved by Company"),
