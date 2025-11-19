@@ -1,12 +1,10 @@
 package controller;
 
 import entity.user.CompanyRepresentative;
-import entity.user.Student;
 import entity.domain.InternshipOpportunity;
 import entity.domain.InternshipApplication;
 import entity.domain.WithdrawalRequest;
 import enums.InternshipStatus;
-import enums.ApplicationStatus;
 import enums.RequestStatus;
 import enums.InternshipLevel;
 import enums.Major;
@@ -156,7 +154,7 @@ public class CareerCenterController {
 
         // Withdraw the application
         application.withdraw();
-        
+
         System.out.println("Withdrawal request approved.");
         return true;
     }

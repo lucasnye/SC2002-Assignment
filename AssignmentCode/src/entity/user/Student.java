@@ -1,8 +1,9 @@
 package entity.user;
 
-import enums.Major;
 import entity.domain.InternshipApplication;
 import entity.domain.InternshipOpportunity;
+import enums.ApplicationStatus;
+import enums.Major;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,7 +91,7 @@ public class Student extends User {
      * Returns if application successfully added
      */
     public boolean addApplication(InternshipApplication application) {
-        if (applications.size() < MAX_APPLICATIONS) {
+        if (getActiveApplicationCount() < MAX_APPLICATIONS) {
             applications.add(application);
             return true;
         }
@@ -108,7 +109,7 @@ public class Student extends User {
      * Checks if student can apply for internship
      */
     public boolean canApply() {
-        return applications.size() < MAX_APPLICATIONS && acceptedInternship == null;
+        return getActiveApplicationCount() < MAX_APPLICATIONS && acceptedInternship == null;
     }
     
     /**
@@ -116,6 +117,15 @@ public class Student extends User {
      */
     public int getApplicationCount() {
         return applications.size();
+    }
+
+    /**
+     * Counts active (non-withdrawn) applications
+     */
+    private long getActiveApplicationCount() {
+        return applications.stream()
+            .filter(app -> app.getApplicationStatus() != ApplicationStatus.WITHDRAWN)
+            .count();
     }
     
     /**
