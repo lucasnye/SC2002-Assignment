@@ -192,7 +192,7 @@ public class FileHandler {
                 ));
             }
             
-            System.out.println("Saved " + reps.size() + " company representatives to " + filePath);
+            // System.out.println("Saved " + reps.size() + " company representatives to " + filePath);
             
         } catch (IOException e) {
             System.err.println("Error writing company representative file: " + e.getMessage());
@@ -345,7 +345,7 @@ public class FileHandler {
                 pw.println(line);
             }
 
-            System.out.println("Saved " + internships.size() + " internships to " + filePath);
+            //System.out.println("Saved " + internships.size() + " internships to " + filePath);
 
         } catch (IOException e) {
             System.err.println("Error writing internship file: " + e.getMessage());
